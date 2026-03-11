@@ -41,10 +41,10 @@ def ejercicio_3():
         print("Su número debe ser entero positivo.")
         numero = int(input("Ingrese un número válido: "))
 
-        x = 1 #Resultado Temporal
-        for i in range(1, numero + 1):
-            x = x*i #Mult factorial
-            print(f"Factorial de {i} es {x}")
+    x = 1 #Resultado Temporal
+    for i in range(1, numero + 1):
+        x = x*i #Mult factorial
+        print(f"Factorial de {i} es {x}")
 
 
 def ejercicio_4():
