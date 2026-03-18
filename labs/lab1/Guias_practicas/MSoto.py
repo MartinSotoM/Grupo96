@@ -1,5 +1,7 @@
-def ejercicio_1():
-    print("\n--- Ejecutando Ejercicio 1 ---")
+# ====== Guía Práctica 1 ======
+
+def ejercicio_1_1():
+    print("\n----- Ejecutando Ejercicio 1 -----")
 
     numero = int(input("Ingresa tu número de terminos: "))
 
@@ -18,8 +20,8 @@ def ejercicio_1():
             i = i + 1
 
 
-def ejercicio_2():
-    print("\n--- Ejecutando Ejercicio 2 ---")
+def ejercicio_2_1():
+    print("\n----- Ejecutando Ejercicio 2 -----")
 
     numero = int(input("Ingresa el número a calcular: "))
 
@@ -32,8 +34,8 @@ def ejercicio_2():
             print(f"Factorial de {i} es {x}")
 
 
-def ejercicio_3():
-    print("\n--- Ejecutando Ejercicio 3 ---")
+def ejercicio_3_1():
+    print("\n----- Ejecutando Ejercicio 3 -----")
 
     numero = int(input("Ingresa el número a calcular: "))
 
@@ -47,8 +49,8 @@ def ejercicio_3():
         print(f"Factorial de {i} es {x}")
 
 
-def ejercicio_4():
-    print("\n--- Ejecutando Ejercicio 4 ---")
+def ejercicio_4_1():
+    print("\n----- Ejecutando Ejercicio 4 -----")
 
     conexion = int(input("Seleccione el tipo de conexión (1 = serie, 2 = paralelo): "))
 
@@ -81,11 +83,68 @@ def ejercicio_4():
         resis_paralelo = 1 / sum(1/r for r in valores)
         print(f"La resistencia total en paralelos es: {resis_paralelo} Ohms")
 
+# ====== Guía Práctica 2 ======
+
+def ejercicio_1_2():
+    print("\n----- Ejecutando Ejercicio 1 -----")
+
+    inicio = 10.0
+    final = 12.0
+    cant_decimales = 1
+    cant_numeros = 10
+
+    import random
+    voltajes = [round(random.uniform(inicio,final),cant_decimales) for _ in range(cant_numeros)]
 
 
-def menu():
+    def analizar_voltajes(voltajes):
+
+        maximo = max(voltajes)
+        minimo = min(voltajes)
+        promedio = sum(voltajes)/len(voltajes)
+        valormax = 12
+        menores = [x for x in voltajes if x < valormax]
+
+        return maximo, minimo, promedio, menores
+
+    a,b,c,d = analizar_voltajes(voltajes)
+
+    def estado_bateria(promedio):
+        if promedio >= 12.2:
+            return "Batería en buen estado."
+        elif 11.8 < promedio < 12.19:
+            return "Batería en descarga."
+        else:
+            return "Batería crítica."
+    
+    estado = estado_bateria(c)
+
+    print("Los voltajes medidos son:",voltajes ,"\nEl valor de voltaje máximo es:",a , "\nEl valor de voltaje mínimo es:",b ,"\nEl voltaje promedio es:",c , "\nLos valores de voltaje menores a 12[V] son:",d, "\nEstado de la batería:", estado)
+
+
+def ejercicio_2_2():
+    print("\n----- Ejecutando Ejercicio 2 -----")
+
+    dispositivos = {
+        "Router_1": {"ip": "192.168.1.1", "estado": "activo", "trafico_mbps": 120},
+        "Switch_1": {"ip": "192.168.1.2", "estado": "activo", "trafico_mbps": 80},
+        "AP_1": {"ip": "192.168.1.3", "estado": "inactivo", "trafico_mbps": 0},
+        "Servidor_1": {"ip": "192.168.1.10", "estado": "activo", "trafico_mbps": 250}
+    }  
+
+    def contar_activos(red):
+        return
+    def trafico_total(red):
+        return
+    def buscar_inactivos(red):
+        return
+    def mayor_trafico(red):
+        return
+
+
+def menu_guia_1():
     while True:
-        print("\n--- MENÚ DE EJERCICIOS ---")
+        print("\n----- MENÚ DE GUÍA 1 -----")
         print("1. Ejecutar Ejercicio 1")
         print("2. Ejecutar Ejercicio 2")
         print("3. Ejecutar Ejercicio 3")
@@ -95,18 +154,58 @@ def menu():
         opcion = input("Selecciona una opción: ")
 
         if opcion == "1":
-            ejercicio_1()
+            ejercicio_1_1()
         elif opcion == "2":
-            ejercicio_2()
+            ejercicio_2_1()
         elif opcion == "3":
-            ejercicio_3()
+            ejercicio_3_1()
         elif opcion == "4":
-            ejercicio_4()
+            ejercicio_4_1()
         elif opcion == "0":
             print("Saliendo del programa...")
             break
         else:
-            print("Opción inválida, vuelve a intentarlo.")
+            print("Opción inválida.")
+
+
+def menu_guia_2():
+    while True:
+        print("\n----- MENÚ DE GUÍA 2 -----")
+        print("1. Ejecutar Ejercicio 1")
+        print("2. Ejecutar Ejercicio 2")
+        print("0. Salir")
+
+        opcion = input("Selecciona una opción: ")
+
+        if opcion == "1":
+            ejercicio_1_2()
+        elif opcion == "2":
+            ejercicio_2_2()
+        elif opcion == "0":
+            print("Saliendo del programa...")
+            break
+        else:
+            print("Opción inválida.")
+
+
+def menu_principal():
+    while True:
+        print("\n===== MENÚ DE GUÍAS PRÁCTICAS =====")
+        print("1. Ir a Guía 1")
+        print("2. Ir a Guía 2")
+        print("0. Salir del programa")
+
+        guia = input("Selecciona una guía: ")
+
+        if guia == "1":
+            menu_guia_1()
+        elif guia == "2":
+            menu_guia_2()
+        elif guia == "0":
+            print("Saliendo del programa...")
+            break
+        else:
+            print("Opción inválida.")
 
 if __name__ == "__main__":
-    menu()
+    menu_principal()
