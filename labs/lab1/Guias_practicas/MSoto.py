@@ -133,14 +133,54 @@ def ejercicio_2_2():
     }  
 
     def contar_activos(red):
-        return
-    def trafico_total(red):
-        return
-    def buscar_inactivos(red):
-        return
-    def mayor_trafico(red):
-        return
+        contador = 0
+        for nombre, datos in red.items():
+            if datos["estado"].lower() == "activo":
+                contador +=1
 
+        return contador
+    
+    total_activos = contar_activos(dispositivos)
+    print(f"Hay {total_activos} dispositivos activos.")
+
+    def trafico_total(red):
+        trafico = 0
+        for datos in red.values():
+            if datos["estado"].lower() == "activo":
+                trafico += datos["trafico_mbps"]
+            
+        return trafico
+    
+    trafico_mbps = trafico_total(dispositivos)
+    print(f"El tráfico total es de: {trafico_mbps}.")
+
+    def buscar_inactivos(red):
+        equipos_inactivos = []
+        for nombre, datos in red.items():
+            if datos["estado"].lower() == "inactivo":
+                equipos_inactivos.append(nombre)
+
+        return equipos_inactivos
+    
+    inactivos = buscar_inactivos(dispositivos)
+    print(f"Los dispositivos inactivos son: {inactivos}.")
+
+    def mayor_trafico(red):
+        disp_mayor_trafico = ""
+        valor_trafico = -1
+        for nombre, datos in red.items():
+            if datos["estado"].lower() == "activo":
+                trafico_actual = datos["trafico_mbps"]
+
+                if trafico_actual > valor_trafico:
+                    valor_trafico = trafico_actual
+                    disp_mayor_trafico = nombre
+
+        return disp_mayor_trafico, valor_trafico
+    
+    dispositivo = mayor_trafico(dispositivos)
+    print(f"El dispositivo con mayor tráfico y su respectivo valor es: {dispositivo}.")
+    
 
 def menu_guia_1():
     while True:
@@ -149,7 +189,7 @@ def menu_guia_1():
         print("2. Ejecutar Ejercicio 2")
         print("3. Ejecutar Ejercicio 3")
         print("4. Ejecutar Ejercicio 4")
-        print("0. Salir")
+        print("0. Volver atrás")
 
         opcion = input("Selecciona una opción: ")
 
@@ -173,7 +213,7 @@ def menu_guia_2():
         print("\n----- MENÚ DE GUÍA 2 -----")
         print("1. Ejecutar Ejercicio 1")
         print("2. Ejecutar Ejercicio 2")
-        print("0. Salir")
+        print("0. Volver atrás")
 
         opcion = input("Selecciona una opción: ")
 
