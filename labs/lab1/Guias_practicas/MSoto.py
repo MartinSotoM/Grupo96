@@ -181,6 +181,34 @@ def ejercicio_2_2():
     dispositivo = mayor_trafico(dispositivos)
     print(f"El dispositivo con mayor tráfico y su respectivo valor es: {dispositivo}.")
     
+def ejercicio_3_2():
+    cargas = [
+    {"nombre": "Motor_1", "voltaje": 400, "corriente": 12, "fp": 0.86},
+    {"nombre": "Bomba_1", "voltaje": 400, "corriente": 8, "fp": 0.82},
+    {"nombre": "Compresor_1", "voltaje": 400, "corriente": 15, "fp": 0.90},
+    {"nombre": "Ventilador_1", "voltaje": 400, "corriente": 5, "fp": 0.78}
+]
+
+    def calcular_potencia(instalacion):
+        potencia_total = 0
+        raiz3 = 3**(1/2)
+
+        for equipo in instalacion:
+            nombre = equipo["nombre"]
+            v = equipo["voltaje"]
+            i = equipo["corriente"]
+            fp = equipo["fp"]
+
+            p_trifasica = raiz3 * v * i * fp
+            print(f"La potencia trifásica de {nombre} es: {p_trifasica:.2f}[W].")
+
+            potencia_total += p_trifasica
+
+        return potencia_total
+    
+    pot_trif_total = calcular_potencia(cargas)
+    print(f"La potencia trifásica total de la instalación es: {pot_trif_total:.2f}[W].")
+
 
 def menu_guia_1():
     while True:
@@ -213,6 +241,7 @@ def menu_guia_2():
         print("\n----- MENÚ DE GUÍA 2 -----")
         print("1. Ejecutar Ejercicio 1")
         print("2. Ejecutar Ejercicio 2")
+        print("3. Ejecutar Ejercicio 3")
         print("0. Volver atrás")
 
         opcion = input("Selecciona una opción: ")
@@ -221,6 +250,8 @@ def menu_guia_2():
             ejercicio_1_2()
         elif opcion == "2":
             ejercicio_2_2()
+        elif opcion == "3":
+            ejercicio_3_2()
         elif opcion == "0":
             print("Saliendo del programa...")
             break
