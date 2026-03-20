@@ -189,26 +189,50 @@ def ejercicio_3_2():
     {"nombre": "Ventilador_1", "voltaje": 400, "corriente": 5, "fp": 0.78}
 ]
 
-    def calcular_potencia(instalacion):
-        potencia_total = 0
+    def calcular_potencia(voltaje, corriente, fp):
         raiz3 = 3**(1/2)
 
-        for equipo in instalacion:
+        return raiz3*voltaje*corriente*fp
+    
+    def procesar_cargas(lista_cargas):
+        for equipo in lista_cargas:
             nombre = equipo["nombre"]
             v = equipo["voltaje"]
             i = equipo["corriente"]
             fp = equipo["fp"]
 
-            p_trifasica = raiz3 * v * i * fp
-            print(f"La potencia trifásica de {nombre} es: {p_trifasica:.2f}[W].")
-
-            potencia_total += p_trifasica
-
-        return potencia_total
+            pot_indiv = calcular_potencia(v, i, fp)
+            equipo["potencia"] = round(pot_indiv,2)
+        
+        return
     
-    pot_trif_total = calcular_potencia(cargas)
-    print(f"La potencia trifásica total de la instalación es: {pot_trif_total:.2f}[W].")
+    procesar_cargas(cargas)
 
+    def resumen_cargas(lista_cargas):
+        pot_total = 0
+        nombre_mayor = ""
+        pot_temp = -1
+        lista_menor = []
+        fp_minimo = 0.80
+
+        for equipo in lista_cargas:
+            pot_actual = equipo["potencia"]
+            fp_actual = equipo["fp"]
+            nombre = equipo["nombre"]
+
+            if pot_actual > pot_temp:
+                nombre_mayor = nombre
+                pot_temp = pot_actual
+
+            if fp_actual < fp_minimo:
+                lista_menor.append(nombre)
+
+            pot_total += pot_actual
+
+        return pot_total, nombre_mayor, lista_menor
+    
+    pot_trif_total, carga_mayor_pot, lista_cargas_menores = resumen_cargas(cargas)
+    print(f"La potencia trifásica total de la instalación es: {pot_trif_total:.2f}[W]. \n La carga con mayor potencia es: {carga_mayor_pot}. \n Las cargas con factor de potencia menor a 0.80 son: {lista_cargas_menores}")
 
 def menu_guia_1():
     while True:
