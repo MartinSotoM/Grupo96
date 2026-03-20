@@ -234,6 +234,44 @@ def ejercicio_3_2():
     pot_trif_total, carga_mayor_pot, lista_cargas_menores = resumen_cargas(cargas)
     print(f"La potencia trifásica total de la instalación es: {pot_trif_total:.2f}[W]. \n La carga con mayor potencia es: {carga_mayor_pot}. \n Las cargas con factor de potencia menor a 0.80 son: {lista_cargas_menores}")
 
+def ejercicio_4_2():
+    estaciones = {
+    "EST_01": {"temperatura": 42, "voltaje": 48.5, "senal": -67, "enlace": "ok"},
+    "EST_02": {"temperatura": 55, "voltaje": 46.8, "senal": -81, "enlace": "ok"},
+    "EST_03": {"temperatura": 39, "voltaje": 44.9, "senal": -75, "enlace": "caido"},
+    "EST_04": {"temperatura": 61, "voltaje": 47.2, "senal": -88, "enlace": "ok"}
+}
+
+    def evaluar_estacion(nombre, datos):
+        fallas = []
+
+        if datos["temperatura"] > 50:
+            fallas.append("Temperatura > 50° ")
+        if datos["voltaje"] > 46.0:
+            fallas.append("Voltaje < 46.0 [V]")
+        if datos["senal"] < -80:
+            fallas.append("Señal < -80 dBm")
+        if datos["enlace"] != "ok":
+            fallas.append("Enlace distinto de OK")
+
+        estado = "Crítico" if len(fallas) > 0 else "Normal"
+
+        return nombre, estado, fallas
+    
+    nombre_est, estado_est, lista_fallas = evaluar_estacion("EST_02", estaciones["EST_02"]) #EST-02 es la estación de prueba
+    print(f"\n El estado de la estación {nombre_est} es {estado_est}, sus fallas son: {lista_fallas}.")
+    
+    #def evaluar_varias_estaciones(**estaciones):
+
+       # return
+
+    #def generar_reporte(resumen):
+
+        #return est_evaluadas, num_criticas, mas_fallas
+    
+   # estaciones_ev, criticas, mayor_fallas = generar_reporte(estaciones)
+    #print(f"Las estaciones evaluadas fueron: {estaciones_ev}. \n El número de estaciones críticas es: {criticas}. \n La estación con más fallas es: {mayor_fallas}.")
+
 def menu_guia_1():
     while True:
         print("\n----- MENÚ DE GUÍA 1 -----")
@@ -266,6 +304,7 @@ def menu_guia_2():
         print("1. Ejecutar Ejercicio 1")
         print("2. Ejecutar Ejercicio 2")
         print("3. Ejecutar Ejercicio 3")
+        print("4. Ejecutar Ejercicio 4")
         print("0. Volver atrás")
 
         opcion = input("Selecciona una opción: ")
@@ -276,6 +315,8 @@ def menu_guia_2():
             ejercicio_2_2()
         elif opcion == "3":
             ejercicio_3_2()
+        elif opcion == "4":
+            ejercicio_4_2()
         elif opcion == "0":
             print("Saliendo del programa...")
             break
