@@ -232,7 +232,7 @@ def ejercicio_3_2():
         return pot_total, nombre_mayor, lista_menor
     
     pot_trif_total, carga_mayor_pot, lista_cargas_menores = resumen_cargas(cargas)
-    print(f"La potencia trifásica total de la instalación es: {pot_trif_total:.2f}[W]. \n La carga con mayor potencia es: {carga_mayor_pot}. \n Las cargas con factor de potencia menor a 0.80 son: {lista_cargas_menores}")
+    print(f"La potencia trifásica total de la instalación es: {pot_trif_total:.2f}[W]. \nLa carga con mayor potencia es: {carga_mayor_pot}. \nLas cargas con factor de potencia menor a 0.80 son: {lista_cargas_menores}")
 
 def ejercicio_4_2():
     estaciones = {

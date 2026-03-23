@@ -1,6 +1,6 @@
 #LABORATORIO 2
 
-def ejercicio_1():
+def ejercicio_1_2():
     red_esp8266 = {
         "Nodo_Tanque": {"ip": "192.168.1.10", "estado": "activo", "salida_dac": 3000} ,
         "Nodo_Motor": {"ip": "192.168.1.11", "estado": "falla", "salida_dac": 0} ,
@@ -36,7 +36,7 @@ def ejercicio_1():
     print(f"El total de nodos registrados es: {nod_reg}. \nLa lista de los nodos en estado falla o inactivo es: {ip_fallasORinact} \nEl promedio de la salida_dac es: {prom_salidaDAC}.")
 
 
-def ejercicio_2():
+def ejercicio_2_2():
     coords_x = [2 , 8 , 8 , 2]
     coords_y = [1 , 1 , 5 , 5]
 
@@ -56,20 +56,49 @@ def ejercicio_2():
     area_BoundBox, tupla_centro = evaluar_zona_poligono(coords_x, coords_y)
     print(f"El área calculada es de: {area_BoundBox}. \nEl centro del polígono de análisis es: {tupla_centro}.")
 
+
+def ejercicio_3_2():
+    angulos_prueba = (45 , 90 , -30 , 15)
+    configuracion_robot = {" velocidad ": 50 ," torque_max ": 120 ," herramienta ": " pinza "
+    }
+
+    def calibrar_robot(*args, **kwargs):
+        ang_total = 0
+        artic_mov = 0
+
+        for angulo in args:
+            ang_total += angulo
+            artic_mov += 1
+        
+        print(f"Hay {artic_mov} articulaciones moviéndose {ang_total} grados.")
+
+        for nombre, datos in kwargs.items():
+            if nombre == "torque_max" and datos > 100:
+                print("Peligro de sobrecarga.")
+            
+            print(f"Las configuraciones recibidas son: ({nombre}: {datos})")
+
+        return
+    
+    calibrar_robot(*angulos_prueba, **configuracion_robot)
+    
+
 def menu_lab2():
     while True:
         print("\n----- MENÚ DE LABORATORIO 2 -----")
-        print("1. Ejecutar Ejercicio 1")
-        print("2. Ejecutar Ejercicio 2")
-        print("3. Ejecutar Ejercicio 3")
+        print("1. Ejecutar Ejercicio 1 / Gestión de Nodos de Control")
+        print("2. Ejecutar Ejercicio 2 / Geometría de Zonas de Análisis")
+        print("3. Ejecutar Ejercicio 3 / Calibración de Brazo Robótico")
         print("0. Volver atrás")
 
         opcion = input("Selecciona una opción: ")
 
         if opcion == "1":
-            ejercicio_1()
+            ejercicio_1_2()
         elif opcion == "2":
-            ejercicio_2()
+            ejercicio_2_2()
+        elif opcion == "3":
+            ejercicio_3_2()
         elif opcion == "0":
             print("Saliendo del programa...")
             break
