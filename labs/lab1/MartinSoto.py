@@ -1,6 +1,5 @@
-#Laboratorio 2
+#LABORATORIO 2
 
-#Ejercicio 1
 def ejercicio_1():
     red_esp8266 = {
         "Nodo_Tanque": {"ip": "192.168.1.10", "estado": "activo", "salida_dac": 3000} ,
@@ -34,7 +33,28 @@ def ejercicio_1():
         return ip_fallas, nodos_totales, prom_sal
 
     ip_fallasORinact, nod_reg, prom_salidaDAC = auditar_red(red_esp8266)
-    print(f"El total de nodos registrados es: {nod_reg}. \n La lista de los nodos en estado falla o inactivo es: {ip_fallasORinact} \n El promedio de la salida_dac es: {prom_salidaDAC}.")
+    print(f"El total de nodos registrados es: {nod_reg}. \nLa lista de los nodos en estado falla o inactivo es: {ip_fallasORinact} \nEl promedio de la salida_dac es: {prom_salidaDAC}.")
+
+
+def ejercicio_2():
+    coords_x = [2 , 8 , 8 , 2]
+    coords_y = [1 , 1 , 5 , 5]
+
+    def evaluar_zona_poligono(x, y):
+        ancho = max(x) - min(x)
+        alto = max(y) - min(y)
+
+        area = ancho*alto
+
+        x_centro = (max(x) + min(x))/2
+        y_centro = (max(y) + min(y))/2
+
+        centro = (x_centro, y_centro)
+
+        return area, centro
+    
+    area_BoundBox, tupla_centro = evaluar_zona_poligono(coords_x, coords_y)
+    print(f"El área calculada es de: {area_BoundBox}. \nEl centro del polígono de análisis es: {tupla_centro}.")
 
 def menu_lab2():
     while True:
@@ -48,7 +68,9 @@ def menu_lab2():
 
         if opcion == "1":
             ejercicio_1()
-        elif opcion == "4":
+        elif opcion == "2":
+            ejercicio_2()
+        elif opcion == "0":
             print("Saliendo del programa...")
             break
         else:
