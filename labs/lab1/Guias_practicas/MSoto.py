@@ -247,7 +247,7 @@ def ejercicio_4_2():
 
         if datos["temperatura"] > 50:
             fallas.append("Temperatura > 50° ")
-        if datos["voltaje"] > 46.0:
+        if datos["voltaje"] < 46.0:
             fallas.append("Voltaje < 46.0 [V]")
         if datos["senal"] < -80:
             fallas.append("Señal < -80 dBm")
