@@ -275,10 +275,11 @@ def ejercicio_4_2():
 def menu_guia_1():
     while True:
         print("\n----- MENÚ DE GUÍA 1 -----")
-        print("1. Ejecutar Ejercicio 1")
-        print("2. Ejecutar Ejercicio 2")
-        print("3. Ejecutar Ejercicio 3")
-        print("4. Ejecutar Ejercicio 4")
+        print("1. Ejecutar Ejercicio 1 / Serie de Fibonacci")
+        print("2. Ejecutar Ejercicio 2 / Serie de Factoriales")
+        print("3. Ejecutar Ejercicio 3 / Validación de Entrada")
+        print("4. Ejecutar Ejercicio 4 / Cálculo de Resistencia Total en Serie o en Paralelo")
+        print("5. Ejecutar Ejercicio 5 / DESAFIO !!")
         print("0. Volver atrás")
 
         opcion = input("Selecciona una opción: ")
@@ -292,7 +293,7 @@ def menu_guia_1():
         elif opcion == "4":
             ejercicio_4_1()
         elif opcion == "0":
-            print("Saliendo del programa...")
+            print("Volviendo al menú principal...")
             break
         else:
             print("Opción inválida.")
@@ -301,10 +302,10 @@ def menu_guia_1():
 def menu_guia_2():
     while True:
         print("\n----- MENÚ DE GUÍA 2 -----")
-        print("1. Ejecutar Ejercicio 1")
-        print("2. Ejecutar Ejercicio 2")
-        print("3. Ejecutar Ejercicio 3")
-        print("4. Ejecutar Ejercicio 4")
+        print("1. Ejecutar Ejercicio 1 / Análisis de Mediciones de Sensores Eléctricos")
+        print("2. Ejecutar Ejercicio 2 / Registro de Dispositivos en una Red de Telecomunicaciones")
+        print("3. Ejecutar Ejercicio 3 / Cálculo de Potencia en Cargas Trifásicas")
+        print("4. Ejecutar Ejercicio 4 / Sistema de Monitoreo de Estaciones Remotas")
         print("0. Volver atrás")
 
         opcion = input("Selecciona una opción: ")
@@ -318,7 +319,7 @@ def menu_guia_2():
         elif opcion == "4":
             ejercicio_4_2()
         elif opcion == "0":
-            print("Saliendo del programa...")
+            print("Volviendo al menú principal...")
             break
         else:
             print("Opción inválida.")

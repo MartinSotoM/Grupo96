@@ -1,3 +1,7 @@
+#LABORATORIO 1
+
+
+
 #LABORATORIO 2
 
 def ejercicio_1_2():
@@ -81,7 +85,33 @@ def ejercicio_3_2():
         return
     
     calibrar_robot(*angulos_prueba, **configuracion_robot)
-    
+
+
+def menu_lab1():
+    while True:
+        print("\n----- MENÚ DE LABORATORIO 1 -----")
+        print("1. Ejecutar Ejercicio 1 / Ley de Ohm y Alerta de Potencia")
+        print("2. Ejecutar Ejercicio 2 / Descarga de un Banco de Baterías")
+        print("3. Ejecutar Ejercicio 3 / Menú de Conversión de Unidades")
+        print("4. Ejecutar Ejercicio 4 / DESAFÍO: Monitoreo de Temperatura Datacenter")
+        print("0. Volver atrás")
+
+        opcion = input("Selecciona una opción: ")
+
+        if opcion == "1":
+            ejercicio_1_1()
+        elif opcion == "2":
+            ejercicio_2_1()
+        elif opcion == "3":
+            ejercicio_3_1()
+        elif opcion == "4":
+            ejercicio_4_1()
+        elif opcion == "0":
+            print("Volviendo al menú principal...")
+            break
+        else:
+            print("Opción inválida.")
+
 
 def menu_lab2():
     while True:
@@ -100,10 +130,30 @@ def menu_lab2():
         elif opcion == "3":
             ejercicio_3_2()
         elif opcion == "0":
+            print("Volviendo al menú principal...")
+            break
+        else:
+            print("Opción inválida.")
+
+
+def menu_principal():
+    while True:
+        print("\n===== MENÚ DE LABORATORIOS =====")
+        print("1. Ir a Laboratorio 1")
+        print("2. Ir a Laboratorio 2")
+        print("0. Salir del programa")
+
+        guia = input("Selecciona un laboratorio: ")
+
+        if guia == "1":
+            menu_lab1()
+        elif guia == "2":
+            menu_lab2()
+        elif guia == "0":
             print("Saliendo del programa...")
             break
         else:
             print("Opción inválida.")
 
 if __name__ == "__main__":
-    menu_lab2()
+    menu_principal()
