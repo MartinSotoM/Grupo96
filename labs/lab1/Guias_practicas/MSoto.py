@@ -1,3 +1,6 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
 # ====== Guía Práctica 1 ======
 
 def ejercicio_1_1():
@@ -272,6 +275,45 @@ def ejercicio_4_2():
    # estaciones_ev, criticas, mayor_fallas = generar_reporte(estaciones)
     #print(f"Las estaciones evaluadas fueron: {estaciones_ev}. \n El número de estaciones críticas es: {criticas}. \n La estación con más fallas es: {mayor_fallas}.")
 
+# ====== Guía Práctica 3 ======
+
+def ejercicio_1_3():
+    t = np.linspace(0, 10, 500)
+    matriz_mov = np.array([2 * np.sin(t), 2 * np.cos(t), 0.5 * t])
+
+    x = matriz_mov[0, :]
+    y = matriz_mov[1, :]
+    z = matriz_mov[2, :]
+
+    plt.subplot(3, 1, 1)
+    plt.plot(t, x, color = "r")
+    plt.title("Gráfico Coordenadas X")
+
+    plt.subplot(3, 1, 2)
+    plt.plot(t, y, color = "b")
+    plt.title("Gráfico Coordenadas Y")
+
+    plt.subplot(3, 1, 3)
+    plt.plot(t, z, color = "g")
+    plt.title("Gráfico Coordenadas Z")
+
+    plt.show()
+
+def ejercicio_2_3():
+    t = np.linspace(0, 0.2, 1000)
+    m = np.cos(2 * np.pi * 5 * t)
+    c = np.sin(2 * np.pi * 100 * t)
+
+    s = (1 + 0.8 * m) * c
+
+    plt.plot(t, m, color = "b", linestyle = "--", label = "Señal Moduladora m(t)")
+    plt.plot(t, s, color = "r", label = "Señal Modulada s(t)")
+
+    plt.legend(loc="upper right")
+    plt.title("Superposición Señales")
+    plt.show()
+
+
 def menu_guia_1():
     while True:
         print("\n----- MENÚ DE GUÍA 1 -----")
@@ -325,11 +367,32 @@ def menu_guia_2():
             print("Opción inválida.")
 
 
+def menu_guia_3():
+    while True:
+        print("\n----- MENÚ DE GUÍA 3 -----")
+        print("1. Ejecutar Ejercicio 1 / Análisis de Señales de Sensores en un Brazo Robótico")
+        print("2. Ejecutar Ejercicio 2 / Modulación de Amplitud (AM) en Telecomunicaciones")
+        print("0. Volver atrás")
+
+        opcion = input("Selecciona una opción: ")
+
+        if opcion == "1":
+            ejercicio_1_3()
+        elif opcion == "2":
+            ejercicio_2_3()
+        elif opcion == "0":
+            print("Volviendo al menú principal...")
+            break
+        else:
+            print("Opción inválida.")
+
+
 def menu_principal():
     while True:
         print("\n===== MENÚ DE GUÍAS PRÁCTICAS =====")
         print("1. Ir a Guía 1")
         print("2. Ir a Guía 2")
+        print("3. Ir a Guía 3")
         print("0. Salir del programa")
 
         guia = input("Selecciona una guía: ")
@@ -338,6 +401,8 @@ def menu_principal():
             menu_guia_1()
         elif guia == "2":
             menu_guia_2()
+        elif guia == "3":
+            menu_guia_3()
         elif guia == "0":
             print("Saliendo del programa...")
             break
