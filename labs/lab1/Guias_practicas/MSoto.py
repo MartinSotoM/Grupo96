@@ -185,6 +185,8 @@ def ejercicio_2_2():
     print(f"El dispositivo con mayor tráfico y su respectivo valor es: {dispositivo}.")
     
 def ejercicio_3_2():
+    print("\n----- Ejecutando Ejercicio 3 -----")
+
     cargas = [
     {"nombre": "Motor_1", "voltaje": 400, "corriente": 12, "fp": 0.86},
     {"nombre": "Bomba_1", "voltaje": 400, "corriente": 8, "fp": 0.82},
@@ -238,6 +240,8 @@ def ejercicio_3_2():
     print(f"La potencia trifásica total de la instalación es: {pot_trif_total:.2f}[W]. \nLa carga con mayor potencia es: {carga_mayor_pot}. \nLas cargas con factor de potencia menor a 0.80 son: {lista_cargas_menores}")
 
 def ejercicio_4_2():
+    print("\n----- Ejecutando Ejercicio 4 -----")
+
     estaciones = {
     "EST_01": {"temperatura": 42, "voltaje": 48.5, "senal": -67, "enlace": "ok"},
     "EST_02": {"temperatura": 55, "voltaje": 46.8, "senal": -81, "enlace": "ok"},
@@ -261,23 +265,43 @@ def ejercicio_4_2():
 
         return nombre, estado, fallas
     
-    nombre_est, estado_est, lista_fallas = evaluar_estacion("EST_02", estaciones["EST_02"]) #EST-02 es la estación de prueba
-    print(f"\n El estado de la estación {nombre_est} es {estado_est}, sus fallas son: {lista_fallas}.")
+    def evaluar_varias_estaciones(**kwargs):
+        reporte_red = {}
+
+        for nombre_est2, datos_est in kwargs.items():
+            nom, est, lista_f = evaluar_estacion(nombre_est2, datos_est)
+
+            reporte_red[nom] = {"estado": est, "fallas": lista_f}
+
+        return reporte_red
     
-    #def evaluar_varias_estaciones(**estaciones):
+    def generar_reporte(resumen):
+        estaciones_evaluadas = list(resumen.keys())
+        cantidad_criticas = 0
+        max_fallas = -1
+        peor_estacion = ""
 
-       # return
+        for nombre, info, in resumen.items():
+            if info["estado"] == "Crítico":
+                cantidad_criticas += 1
 
-    #def generar_reporte(resumen):
+            num_fallas_actual = len(info["fallas"])
+            if num_fallas_actual > max_fallas:
+                max_fallas = num_fallas_actual
+                peor_estacion = nombre
 
-        #return est_evaluadas, num_criticas, mas_fallas
+        return estaciones_evaluadas, cantidad_criticas, peor_estacion
     
-   # estaciones_ev, criticas, mayor_fallas = generar_reporte(estaciones)
-    #print(f"Las estaciones evaluadas fueron: {estaciones_ev}. \n El número de estaciones críticas es: {criticas}. \n La estación con más fallas es: {mayor_fallas}.")
+    diccionario_resumen = evaluar_varias_estaciones(**estaciones)
+    lista_estados, total_criticas, est_peor = generar_reporte(diccionario_resumen)
+
+    print(f"Estaciones evaluadas: {lista_estados} \nTotal en estado crítico: {total_criticas} \nEstación con más fallas: {est_peor}")
 
 # ====== Guía Práctica 3 ======
 
 def ejercicio_1_3():
+    print("\n----- Ejecutando Ejercicio 1 -----")
+
     t = np.linspace(0, 10, 500)
     matriz_mov = np.array([2 * np.sin(t), 2 * np.cos(t), 0.5 * t])
 
@@ -299,7 +323,10 @@ def ejercicio_1_3():
 
     plt.show()
 
+
 def ejercicio_2_3():
+    print("\n----- Ejecutando Ejercicio 2 -----")
+
     t = np.linspace(0, 0.2, 1000)
     m = np.cos(2 * np.pi * 5 * t)
     c = np.sin(2 * np.pi * 100 * t)
@@ -308,9 +335,49 @@ def ejercicio_2_3():
 
     plt.plot(t, m, color = "b", linestyle = "--", label = "Señal Moduladora m(t)")
     plt.plot(t, s, color = "r", label = "Señal Modulada s(t)")
-
-    plt.legend(loc="upper right")
+    plt.legend(loc = "upper right")
     plt.title("Superposición Señales")
+
+    plt.show()
+
+
+def ejercicio_3_3():
+    print("\n----- Ejecutando Ejercicio 3 -----")
+
+    t = np.linspace(0, 0.06, 100)
+    faseA = 311 * np.sin(2 * np.pi * 50 * t)
+    faseB = 311 * np.sin(2 * np.pi * 50 * t - (2 * np.pi / 3))
+    faseC = 311 * np.sin(2 * np.pi * 50 * t + (2 * np.pi / 3))
+
+    plt.subplot(1, 2, 1)
+    plt.plot(t, faseA, color = "r", label = "Fase A")
+    plt.plot(t, faseB, color = "b", label = "Fase B")
+    plt.plot(t, faseC, color = "g", label = "Fase C")
+    plt.legend(loc = "upper left")
+    plt.title("Gráfica de las Tres Fases Superpuestas")
+
+    plt.subplot(1, 2, 2)
+    plt.plot(t, faseA + faseB + faseC)
+    plt.ylim(-50, 50)
+    plt.title("Gráfica de la Suma de las Tres Fases")
+
+    plt.show()
+
+
+def ejercicio_4_3():
+    print("\n----- Ejecutando Ejercicio 4 -----")
+
+    t = np.linspace(0, 2, 800)
+    v_ideal = 3.3 * (1 - np.exp(-2 * t))
+    ruido = np.random.normal(0, 0.2, len(t))
+    s_medida = v_ideal + ruido
+
+    plt.plot(t, s_medida, color = "grey", label = "Señal Ruidosa")
+    plt.plot(t, v_ideal, color = "r", label = "Señal Ideal")
+    plt.legend(loc = "lower right")
+    plt.xlabel("Tiempo [s]")
+    plt.ylabel("Voltaje [V]")
+
     plt.show()
 
 
@@ -372,6 +439,8 @@ def menu_guia_3():
         print("\n----- MENÚ DE GUÍA 3 -----")
         print("1. Ejecutar Ejercicio 1 / Análisis de Señales de Sensores en un Brazo Robótico")
         print("2. Ejecutar Ejercicio 2 / Modulación de Amplitud (AM) en Telecomunicaciones")
+        print("3. Ejecutar Ejercicio 3 / Análisis de un Sistema Eléctrico Trifásico")
+        print("4. Ejecutar Ejercicio 4 / Filtrado de Ruido en una Señal Electrónica")
         print("0. Volver atrás")
 
         opcion = input("Selecciona una opción: ")
@@ -380,6 +449,10 @@ def menu_guia_3():
             ejercicio_1_3()
         elif opcion == "2":
             ejercicio_2_3()
+        elif opcion == "3":
+            ejercicio_3_3()
+        elif opcion == "4":
+            ejercicio_4_3()
         elif opcion == "0":
             print("Volviendo al menú principal...")
             break
