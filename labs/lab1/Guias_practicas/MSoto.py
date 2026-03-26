@@ -1,5 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import argparse
+import sys
 
 # ====== Guía Práctica 1 ======
 
@@ -85,6 +87,27 @@ def ejercicio_4_1():
     else:
         resis_paralelo = 1 / sum(1/r for r in valores)
         print(f"La resistencia total en paralelos es: {resis_paralelo} Ohms")
+
+
+def ejercicio_5_1():
+    print("\n----- [AVISO] El Ejercicio 5 utiliza una herramienta de terminal independiente  -----")
+
+    parser = argparse.ArgumentParser(description = "Calculadora Resistencias Equivalentes")
+    parser.add_argument("--tipo", type = str, required = True, choices = ["serie", "paralelo"], help = "Indica el tipo de conexión")
+    parser.add_argument("--resistencias", type = float, nargs = "+", required = True, help = "Valores de las resistencias")
+    args = parser.parse_args()
+
+    for r in args.resistencias:
+        if r <= 0:
+            print("ERROR: todos los valores de resistencia deben ser mayores a 0.")
+            sys.exit(1)
+    
+    if args.tipo == "serie":
+        resis_total_s = sum(args.resistencias)
+        print(f"La resistencia equivalente en serie es de: {resis_total_s:.2f} Ohms.")
+    elif args.tipo == "paralelo":
+        resis_total_p = 1 / sum(1/r for r in args.resistencias)
+        print(f"La resistencia equivalente en paralelo es de: {resis_total_p:.2f} Ohms.")
 
 # ====== Guía Práctica 2 ======
 
@@ -183,7 +206,8 @@ def ejercicio_2_2():
     
     dispositivo = mayor_trafico(dispositivos)
     print(f"El dispositivo con mayor tráfico y su respectivo valor es: {dispositivo}.")
-    
+
+
 def ejercicio_3_2():
     print("\n----- Ejecutando Ejercicio 3 -----")
 
@@ -238,6 +262,7 @@ def ejercicio_3_2():
     
     pot_trif_total, carga_mayor_pot, lista_cargas_menores = resumen_cargas(cargas)
     print(f"La potencia trifásica total de la instalación es: {pot_trif_total:.2f}[W]. \nLa carga con mayor potencia es: {carga_mayor_pot}. \nLas cargas con factor de potencia menor a 0.80 son: {lista_cargas_menores}")
+
 
 def ejercicio_4_2():
     print("\n----- Ejecutando Ejercicio 4 -----")
@@ -401,6 +426,8 @@ def menu_guia_1():
             ejercicio_3_1()
         elif opcion == "4":
             ejercicio_4_1()
+        elif opcion == "5":
+            ejercicio_5_1()
         elif opcion == "0":
             print("Volviendo al menú principal...")
             break

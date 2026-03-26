@@ -1,10 +1,71 @@
 #LABORATORIO 1
 
+def ejercicio_1_1():
+    print("\n----- Ejecutando Ejercicio 1 -----")
 
+    voltaje = float(input("Ingresa un valor de voltaje (en voltios):"))
+    corriente = float(input("Ingresa un valor de corriente (en amperios):"))
+
+    resistencia = voltaje/corriente
+    p_disipada = voltaje * corriente
+
+    print(f"La resistencia tiene un valor de: {resistencia} Ohms. \nLa potencia disipada tiene un valor de: {p_disipada} Watts")
+
+    if p_disipada > 1000:
+        print("¡Peligro! Alta disipación de potencia detectada.")
+    else:
+        print("Operación en rangos seguros.")
+
+
+def ejercicio_2_1():
+    print("\n----- Ejecutando Ejercicio 2 -----")
+
+    v_inicial = float(input("Ingrese un valor de voltaje inicial:"))
+    v_min = float(input("Ingrese un valor de voltaje mínimo de operación:"))
+    horas = 0
+
+    while v_inicial > v_min:
+        v_inicial *= 0.97
+        horas += 1
+
+    print(f"Pasaron {horas} horas antes de que el banco de baterías requiriera una recarga.")
+
+
+def ejercicio_3_1():
+    print("\n----- Ejecutando Ejercicio 3 -----")
+
+    while True:
+        print("\n--- Menú de Conversión de Unidades ---")
+        print("1. Convertir miliamperios (mA) a amperios (A).")
+        print("2. Convertir microfaradios (µF) a faradios (F).")
+        print("3. Convertir kiloohmios (kΩ) a ohmios (Ω).")
+        print("4. Salir")
+
+        conversion = input("Selecciona una opción: ")
+
+        if conversion == "1":
+            print("Convirtiendo...")
+        elif conversion == "2":
+            print("Convirtiendo...")
+        elif conversion == "3":
+            print("Convirtiendo...")
+        elif conversion == "4":
+            print("Volviendo atrás...")
+            break
+        else:
+            print("Error: opción inválida.")
+
+
+def ejercicio_4_1():
+    print("\n----- Ejecutando Ejercicio 4 -----")
+
+    return
 
 #LABORATORIO 2
 
 def ejercicio_1_2():
+    print("\n----- Ejecutando Ejercicio 1 -----")
+
     red_esp8266 = {
         "Nodo_Tanque": {"ip": "192.168.1.10", "estado": "activo", "salida_dac": 3000} ,
         "Nodo_Motor": {"ip": "192.168.1.11", "estado": "falla", "salida_dac": 0} ,
@@ -41,6 +102,8 @@ def ejercicio_1_2():
 
 
 def ejercicio_2_2():
+    print("\n----- Ejecutando Ejercicio 2 -----")
+
     coords_x = [2 , 8 , 8 , 2]
     coords_y = [1 , 1 , 5 , 5]
 
@@ -62,6 +125,8 @@ def ejercicio_2_2():
 
 
 def ejercicio_3_2():
+    print("\n----- Ejecutando Ejercicio 3 -----")
+
     angulos_prueba = (45 , 90 , -30 , 15)
     configuracion_robot = {" velocidad ": 50 ," torque_max ": 120 ," herramienta ": " pinza "
     }
