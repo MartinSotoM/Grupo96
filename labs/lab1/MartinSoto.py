@@ -59,7 +59,18 @@ def ejercicio_3_1():
 def ejercicio_4_1():
     print("\n----- Ejecutando Ejercicio 4 -----")
 
-    return
+    while True:
+        temperatura = float(input("Ingrese una lectura de temperatura (en grados Celsius):"))
+
+        if 20 <= temperatura <= 45:
+            print("Estado normal.")
+        elif 45 < temperatura <= 75:
+            print("Advertencia: Encendiendo ventiladores auxiliares.")
+        elif temperatura > 75:
+            print("¡Peligro Crítico! Apagando servidor de emergencia")
+            break
+        else:
+            print("Error: opción inválida.")
 
 #LABORATORIO 2
 
