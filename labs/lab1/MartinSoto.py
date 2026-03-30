@@ -1,3 +1,6 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
 #LABORATORIO 1
 
 def ejercicio_1_1():
@@ -162,6 +165,65 @@ def ejercicio_3_2():
     
     calibrar_robot(*angulos_prueba, **configuracion_robot)
 
+#LABORATORIO 3
+
+def ejercicio_1_3():
+    numero = int(input("Ingrese la cantidad de coeficientes (se recomienda entre 6 y 12):"))
+    lista = []
+
+    if numero <= 0:
+        print("Su numero debe ser entero positivo.")
+    else:
+        a = 0
+        b = 1
+
+        for _ in range(numero):
+            lista.append(a)
+            x = a + b #Temporal
+            a = b #Término base
+            b = x #Siguiente término
+    
+    radios = [r for r in lista if r > 0]
+    xc, yc = 0, 0
+    angulo = 0
+
+    for i in range(len(radios)):
+        r = radios[i]
+
+        theta  = np.linspace(angulo, angulo + np.pi/2, 100)
+        x_arco = xc + r * np.cos(theta)
+        y_arco = yc + r * np.sin(theta)
+
+        plt.plot(x_arco, y_arco, "b-", linewidth = 2)
+
+        if i < len(radios) - 1:
+            r_next = radios[i + 1]
+            angulo_final = angulo + np.pi/2
+
+            xc = xc + (r - r_next) * np.cos(angulo_final)
+            yc = yc + (r - r_next) * np.sin(angulo_final)
+
+        angulo += np.pi/2
+
+    plt.axis("equal")
+    plt.title("Espiral de Fibonacci")
+    plt.show()
+
+
+def ejercicio_2_3():
+    encuesta = {"Python": 45 , "C++": 28 , "C": 15 , "Java": 12 , "Rust": 8}
+
+    lenguajes = list(encuesta.keys())
+    votos = list(encuesta.values())
+
+    colores_representativos = ['#FFD43B', "#0D426B", '#A8B9CC', "#980e0e", '#DEA584']
+    
+    plt.bar(lenguajes, votos, color = colores_representativos)
+    plt.title("Encuesta de Lenguajes de Programación")
+    plt.xlabel("Lenguajes de Programación")
+    plt.ylabel("Cantidad de Votos")
+    plt.show()
+
 
 def menu_lab1():
     while True:
@@ -212,11 +274,38 @@ def menu_lab2():
             print("Opción inválida.")
 
 
+def menu_lab3():
+    while True:
+        print("\n----- MENÚ DE LABORATORIO 3 -----")
+        print("1. Ejecutar Ejercicio 1 / Espiral de Fibonacci")
+        print("2. Ejecutar Ejercicio 2 / Encuesta de Lenguajes de Programación")
+        print("3. Ejecutar Ejercicio 3")
+        print("4. Ejecutar Ejercicio 4")
+        print("0. Volver atrás")
+
+        opcion = input("Selecciona una opción: ")
+
+        if opcion == "1":
+            ejercicio_1_3()
+        elif opcion == "2":
+            ejercicio_2_3()
+        elif opcion == "3":
+            ejercicio_3_3()
+        elif opcion == "4":
+            ejercicio_4_3()
+        elif opcion == "0":
+            print("Volviendo al menú principal...")
+            break
+        else:
+            print("Opción inválida.")
+
+
 def menu_principal():
     while True:
         print("\n===== MENÚ DE LABORATORIOS =====")
         print("1. Ir a Laboratorio 1")
         print("2. Ir a Laboratorio 2")
+        print("3. Ir a Laboratorio 3")
         print("0. Salir del programa")
 
         guia = input("Selecciona un laboratorio: ")
@@ -225,6 +314,8 @@ def menu_principal():
             menu_lab1()
         elif guia == "2":
             menu_lab2()
+        elif guia == "3":
+            menu_lab3()
         elif guia == "0":
             print("Saliendo del programa...")
             break
