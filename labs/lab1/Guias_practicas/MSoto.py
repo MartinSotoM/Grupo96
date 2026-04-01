@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 import argparse
 import sys
 
@@ -405,6 +406,19 @@ def ejercicio_4_3():
 
     plt.show()
 
+# ====== Guía Práctica 4 ======
+
+def ejercicio_1_4():
+    sensor = pd.read_csv("sensor_datos.csv")
+    sensor = sensor.dropna()
+    sensor["Potencia_W"] = sensor["voltaje"] * sensor["corriente"]
+    sensor["Alerta_Humedad"] = sensor["humedad"] > 70
+
+    plt.plot(sensor["fecha"], sensor["Potencia_W"], label = "Potencia_W", color = "b")
+    plt.plot(sensor["fecha"], sensor["temperatura"], label = "Temperatura", color = "r")
+    plt.grid(True)
+    plt.xticks(rotation = 45)
+
 
 def menu_guia_1():
     while True:
@@ -487,12 +501,33 @@ def menu_guia_3():
             print("Opción inválida.")
 
 
+def menu_guia_4():
+    while True:
+        print("\n----- MENÚ DE GUÍA 4 -----")
+        print("1. Ejecutar Ejercicio 1 / Sensor Ambiental - Limpieza y Transformación")
+        print("2. Ejecutar Ejercicio 2 / ")
+        print("3. Ejecutar Ejercicio 3 / ")
+        print("4. Ejecutar Ejercicio 4 / ")
+        print("0. Volver atrás")
+
+        opcion = input("Selecciona una opción: ")
+
+        if opcion == "1":
+            ejercicio_1_4()
+        elif opcion == "0":
+            print("Volviendo al menú principal...")
+            break
+        else:
+            print("Opción inválida.")
+
+
 def menu_principal():
     while True:
         print("\n===== MENÚ DE GUÍAS PRÁCTICAS =====")
         print("1. Ir a Guía 1")
         print("2. Ir a Guía 2")
         print("3. Ir a Guía 3")
+        print("4. Ir a Guía 4")
         print("0. Salir del programa")
 
         guia = input("Selecciona una guía: ")
@@ -503,6 +538,8 @@ def menu_principal():
             menu_guia_2()
         elif guia == "3":
             menu_guia_3()
+        elif guia == "4":
+            menu_guia_4()
         elif guia == "0":
             print("Saliendo del programa...")
             break
