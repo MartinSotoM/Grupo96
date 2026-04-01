@@ -409,6 +409,8 @@ def ejercicio_4_3():
 # ====== Guía Práctica 4 ======
 
 def ejercicio_1_4():
+    print("\n----- Ejecutando Ejercicio 1 -----")
+
     sensor = pd.read_csv("sensor_datos.csv")
     sensor = sensor.dropna()
     sensor["Potencia_W"] = sensor["voltaje"] * sensor["corriente"]
@@ -417,7 +419,68 @@ def ejercicio_1_4():
     plt.plot(sensor["fecha"], sensor["Potencia_W"], label = "Potencia_W", color = "b")
     plt.plot(sensor["fecha"], sensor["temperatura"], label = "Temperatura", color = "r")
     plt.grid(True)
-    plt.xticks(rotation = 45)
+    plt.xticks(rotation = 90)
+    plt.show()
+
+
+def ejercicio_2_4():
+    print("\n----- Ejecutando Ejercicio 2 -----")
+
+    sensor = pd.read_csv("calidad_aire.csv")
+    print("Los parámetros del archivo son:")
+    print(sensor.shape)
+    print(sensor.dtypes)
+    print(sensor.describe())
+
+    media_T = np.mean(sensor["temperatura"])
+    print(f"\nLa media (con el comando mean) de la temperatura es: {media_T:.5f}")
+
+    sensor_filtrado = sensor[sensor["pm25"] > 35]
+
+    sensor.to_csv("alerta_aire.csv", index = False, sep = ";", encoding = "utf-8")
+
+
+def ejercicio_3_4():
+    print("\n----- Ejecutando Ejercicio 3 -----")
+
+    consumo = pd.read_csv("consumo_energia.csv")
+    print(consumo.iloc[4:15, :])
+
+    corr_consumo_costo = consumo["consumo_kwh"].corr(consumo["costo_clp"])
+    print(f"\nLa correlación entre el consumo y el costo es: {corr_consumo_costo:.2f}, lo que no tiene sentido, ya que al consumir más energía el costo debería ser mayor y así cumplir con una correlación cercana al 1, en nuestro caso los valores son arbitrarios, por momentos con un consumo mayor el costo es menor que al consumir menos energía.")
+
+    prom_consumo = np.mean(consumo["consumo_kwh"])
+
+    dias_ahorro = consumo[consumo["consumo_kwh"] < prom_consumo]
+    dias_ahorro.to_json("ahorro_energetico.json", orient = "records", force_ascii = False)
+
+    plt.plot(consumo["fecha"], consumo["consumo_kwh"], color = "g", marker = "x")
+    plt.title("Evolución del Consumo Energético")
+    plt.xlabel("Fecha")
+    plt.ylabel("Consumo (kWh)")
+    plt.xticks(rotation = 90)
+    plt.show()
+
+
+def ejercicio_4_4():
+    print("\n----- Ejecutando Ejercicio 4 -----")
+
+    motor = pd.read_csv("motor_dc.csv")
+    motor = motor.drop_duplicates()
+
+    prom_temperatura = motor["temperatura_motor"].mean()
+    motor["temperatura_motor"] = motor["temperatura_motor"].fillna(prom_temperatura)
+
+    corriente_nominal = motor["corriente_a"].mean()
+    motor_fallas = motor[(motor["velocidad_rpm"] < 100) & (motor["corriente_a"] > corriente_nominal)]
+    print(f"Las posibles fallas del motor son: {motor_fallas}")
+
+    plt.plot(motor["tiempo_s"], motor["temperatura_motor"])
+    plt.title("Temperatura del Motor DC")
+    plt.xlabel("Tiempo (s)")
+    plt.ylabel("Temperatura (°C)")
+    plt.tight_layout()
+    plt.show()
 
 
 def menu_guia_1():
@@ -505,15 +568,21 @@ def menu_guia_4():
     while True:
         print("\n----- MENÚ DE GUÍA 4 -----")
         print("1. Ejecutar Ejercicio 1 / Sensor Ambiental - Limpieza y Transformación")
-        print("2. Ejecutar Ejercicio 2 / ")
-        print("3. Ejecutar Ejercicio 3 / ")
-        print("4. Ejecutar Ejercicio 4 / ")
+        print("2. Ejecutar Ejercicio 2 / Calidad del Aire - Estadísticas y Resumen")
+        print("3. Ejecutar Ejercicio 3 / Consumo Energético - Correlación y Slicing")
+        print("4. Ejecutar Ejercicio 4 / Motor DC - Detección de Anomalías")
         print("0. Volver atrás")
 
         opcion = input("Selecciona una opción: ")
 
         if opcion == "1":
             ejercicio_1_4()
+        elif opcion == "2":
+            ejercicio_2_4()
+        elif opcion == "3":
+            ejercicio_3_4()
+        elif opcion == "4":
+            ejercicio_4_4()
         elif opcion == "0":
             print("Volviendo al menú principal...")
             break
