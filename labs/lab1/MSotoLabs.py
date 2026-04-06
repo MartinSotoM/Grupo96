@@ -1,6 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+import random
+import time
 
 #LABORATORIO 1
 
@@ -233,12 +235,70 @@ def ejercicio_2_3():
 def ejercicio_3_3():
     print("\n----- Ejecutando Ejercicio 3 -----")
 
-    matriz1 = np.random.rand(100, 100)
-    matriz2 = np.random.rand(100, 100)
+    N = 100
+    matriz1 = [[random.random() for _ in range(N)] for _ in range(N)]
+    matriz2 = [[random.random() for _ in range(N)] for _ in range(N)]
+    matriz_g = [[0.0 for _ in range(N)] for _ in range(N)]
+
+    A_np = np.array(matriz1)
+    B_np = np.array(matriz2)
+
+    inicio_p = time.time()
+    
+    for i in range(N):
+        for j in range(N):
+            for k in range(N):
+                matriz_g[i][j] += matriz1[i][k] * matriz2[k][j]
+                
+    fin_p = time.time()
+    tiempo_p = fin_p - inicio_p
+
+    inicio_np = time.time()
+    
+    matriz_gNP = A_np @ B_np
+    
+    fin_np = time.time()
+    tiempo_np = fin_np - inicio_np
+
+    print(f"Tiempo Python Puro: {tiempo_p:.4f} segundos")
+    print(f"Tiempo NumPy:  {tiempo_np:.4f} segundos")
+
+    if tiempo_np == 0:
+        tiempo_np = 0.0001
+
+    aceleracion = tiempo_p / tiempo_np
+    print(f"\nNumPy fue {aceleracion:.2f} veces más rápido.")
 
 
 def ejercicio_4_3():
     print("\n----- Ejecutando Ejercicio 4 -----")
+
+    N = 5_000_000
+    lista_nativa = [random.random() for _ in range(N)]
+    arreglo_numpy = np.random.rand(N)
+
+    inicio_nativo = time.time()
+    
+    lista_cuadrado = [x**2 for x in lista_nativa] 
+    
+    fin_nativo = time.time()
+    tiempo_nativo = fin_nativo - inicio_nativo
+
+    inicio_numpy = time.time()
+    
+    arreglo_cuadrado = arreglo_numpy ** 2 
+    
+    fin_numpy = time.time()
+    tiempo_numpy = fin_numpy - inicio_numpy
+
+    print(f"Tiempo Python Puro (List Comprehension): {tiempo_nativo:.4f} segundos")
+    print(f"Tiempo NumPy (Vectorizado): {tiempo_numpy:.4f} segundos")
+    
+    if tiempo_numpy == 0: 
+        tiempo_numpy = 0.0001
+        
+    aceleracion = tiempo_nativo / tiempo_numpy
+    print(f"\nNumPy es {aceleracion:.2f} veces más rápido")
 
 #LABORATORIO 4
 
@@ -277,6 +337,16 @@ def ejercicio_3_4():
 
 def ejercicio_4_4():
     print("\n----- Ejecutando Ejercicio 4 -----")
+    reg_ventas = pd.read_csv("ventas_tienda.csv")
+
+    plt.plot(reg_ventas["Mes"], reg_ventas["Laptops"], color = "r", label = "Laptops")
+    plt.plot(reg_ventas["Mes"], reg_ventas["Smartphones"], color = "b", label = "Smartphones")
+    plt.title("Registro Mensual de Ventas")
+    plt.ylabel("Ventas")
+    plt.xlabel("Mes")
+    plt.legend()
+    plt.grid(True)
+    plt.show()
     
 
 def menu_lab1():
@@ -334,7 +404,7 @@ def menu_lab3():
         print("1. Ejecutar Ejercicio 1 / Espiral de Fibonacci")
         print("2. Ejecutar Ejercicio 2 / Encuesta de Lenguajes de Programación")
         print("3. Ejecutar Ejercicio 3 / Multiplicación de Matrices")
-        print("4. Ejecutar Ejercicio 4 / ")
+        print("4. Ejecutar Ejercicio 4 / Benchmark de Rendimiento: Operaciones Vectorizadas")
         print("0. Volver atrás")
 
         opcion = input("Selecciona una opción: ")
@@ -359,8 +429,8 @@ def menu_lab4():
         print("\n----- MENÚ DE LABORATORIO 4 -----")
         print("1. Ejecutar Ejercicio 1 / Gestor de Playlist Musical")
         print("2. Ejecutar Ejercicio 2 / Tienda de Videojuegos: Operaciones y Filtros")
-        print("3. Ejecutar Ejercicio 3 / Rgistro de Notas: Limpieza de CSV")
-        print("4. Ejecutar Ejercicio 4")
+        print("3. Ejecutar Ejercicio 3 / Registro de Notas: Limpieza de CSV")
+        print("4. Ejecutar Ejercicio 4 / Ventas Mensuales: Visualización con Matplotlib")
         print("0. Volver atrás")
 
         opcion = input("Selecciona una opción: ")
