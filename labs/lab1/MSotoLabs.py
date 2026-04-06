@@ -1,3 +1,7 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+
 #LABORATORIO 1
 
 def ejercicio_1_1():
@@ -162,6 +166,118 @@ def ejercicio_3_2():
     
     calibrar_robot(*angulos_prueba, **configuracion_robot)
 
+#LABORATORIO 3
+
+def ejercicio_1_3():
+    print("\n----- Ejecutando Ejercicio 1 -----")
+
+    numero = int(input("Ingrese la cantidad de coeficientes (se recomienda entre 6 y 12):"))
+    lista = []
+
+    if numero <= 0:
+        print("Su numero debe ser entero positivo.")
+    else:
+        a = 0
+        b = 1
+
+        for _ in range(numero):
+            lista.append(a)
+            x = a + b #Temporal
+            a = b #Término base
+            b = x #Siguiente término
+    
+    radios = [r for r in lista if r > 0]
+    xc, yc = 0, 0
+    angulo = 0
+
+    for i in range(len(radios)):
+        r = radios[i]
+
+        theta  = np.linspace(angulo, angulo + np.pi/2, 100)
+        x_arco = xc + r * np.cos(theta)
+        y_arco = yc + r * np.sin(theta)
+
+        plt.plot(x_arco, y_arco, "b-", linewidth = 2)
+
+        if i < len(radios) - 1:
+            r_next = radios[i + 1]
+            angulo_final = angulo + np.pi/2
+
+            xc = xc + (r - r_next) * np.cos(angulo_final)
+            yc = yc + (r - r_next) * np.sin(angulo_final)
+
+        angulo += np.pi/2
+
+    plt.axis("equal")
+    plt.title("Espiral de Fibonacci")
+    plt.show()
+
+
+def ejercicio_2_3():
+    print("\n----- Ejecutando Ejercicio 2 -----")
+
+    encuesta = {"Python": 45 , "C++": 28 , "C": 15 , "Java": 12 , "Rust": 8}
+
+    lenguajes = list(encuesta.keys())
+    votos = list(encuesta.values())
+
+    colores_representativos = ['#FFD43B', "#0D426B", '#A8B9CC', "#980e0e", '#DEA584']
+    
+    plt.bar(lenguajes, votos, color = colores_representativos)
+    plt.title("Encuesta de Lenguajes de Programación")
+    plt.xlabel("Lenguajes de Programación")
+    plt.ylabel("Cantidad de Votos")
+    plt.show()
+
+
+def ejercicio_3_3():
+    print("\n----- Ejecutando Ejercicio 3 -----")
+
+    matriz1 = np.random.rand(100, 100)
+    matriz2 = np.random.rand(100, 100)
+
+
+def ejercicio_4_3():
+    print("\n----- Ejecutando Ejercicio 4 -----")
+
+#LABORATORIO 4
+
+def ejercicio_1_4():
+    print("\n----- Ejecutando Ejercicio 1 -----")
+    datos_canciones = {"Cancion": ["Buenaventura y Caney", "La Bomba", "Sopa de Caracol", "El Cuarto de Tula"], "Artista": ["Andres Cepeda", "Azul Azul", "Banda Blanca", "Buena Vista Social Club"], "Duracion_seg": [371, 123, 293, 445]}
+    canciones = pd.DataFrame(datos_canciones)
+    
+    print("Propiedades estructurales del DataFrame:")
+    print(canciones.shape)
+    print("Tipos de datos de columnas:")
+    print(canciones.dtypes)
+
+
+def ejercicio_2_4():
+    print("\n----- Ejecutando Ejercicio 2 -----")
+    datos_juegos = {"Juego": ["Cyberpunk 2077", "Minecraft", "Hollow Knight", "FIFA24"] ,"Precio_Base": [40000 , 15000 , 7500 , 45000] ,"Descuento_Porcentaje": [50 , 0 , 20 , 10]}
+    datos = pd.DataFrame(datos_juegos)
+
+    datos["Precio_Final"] = datos["Precio_Base"] - datos["Precio_Base"] * (datos["Descuento_Porcentaje"] / 100)
+    juegos_oferta = datos[datos["Precio_Final"] < 20000]
+
+    print(juegos_oferta)
+
+
+def ejercicio_3_4():
+    print("\n----- Ejecutando Ejercicio 3 -----")
+    notas = pd.read_csv("notas_alumnos.csv")
+    notas_limpias = notas.dropna()
+
+    notas_limpias["Promedio"] = (notas_limpias["Parcial_1"] + notas_limpias["Parcial_2"]) / 2
+
+    print("El DataFrame resultante es:")
+    print(notas_limpias)
+
+
+def ejercicio_4_4():
+    print("\n----- Ejecutando Ejercicio 4 -----")
+    
 
 def menu_lab1():
     while True:
@@ -212,11 +328,65 @@ def menu_lab2():
             print("Opción inválida.")
 
 
+def menu_lab3():
+    while True:
+        print("\n----- MENÚ DE LABORATORIO 3 -----")
+        print("1. Ejecutar Ejercicio 1 / Espiral de Fibonacci")
+        print("2. Ejecutar Ejercicio 2 / Encuesta de Lenguajes de Programación")
+        print("3. Ejecutar Ejercicio 3 / Multiplicación de Matrices")
+        print("4. Ejecutar Ejercicio 4 / ")
+        print("0. Volver atrás")
+
+        opcion = input("Selecciona una opción: ")
+
+        if opcion == "1":
+            ejercicio_1_3()
+        elif opcion == "2":
+            ejercicio_2_3()
+        elif opcion == "3":
+            ejercicio_3_3()
+        elif opcion == "4":
+            ejercicio_4_3()
+        elif opcion == "0":
+            print("Volviendo al menú principal...")
+            break
+        else:
+            print("Opción inválida.")
+
+
+def menu_lab4():
+    while True:
+        print("\n----- MENÚ DE LABORATORIO 4 -----")
+        print("1. Ejecutar Ejercicio 1 / Gestor de Playlist Musical")
+        print("2. Ejecutar Ejercicio 2 / Tienda de Videojuegos: Operaciones y Filtros")
+        print("3. Ejecutar Ejercicio 3 / Rgistro de Notas: Limpieza de CSV")
+        print("4. Ejecutar Ejercicio 4")
+        print("0. Volver atrás")
+
+        opcion = input("Selecciona una opción: ")
+
+        if opcion == "1":
+            ejercicio_1_4()
+        elif opcion == "2":
+            ejercicio_2_4()
+        elif opcion == "3":
+            ejercicio_3_4()
+        elif opcion == "4":
+            ejercicio_4_4()
+        elif opcion == "0":
+            print("Volviendo al menú principal...")
+            break
+        else:
+            print("Opción inválida.")
+
+
 def menu_principal():
     while True:
         print("\n===== MENÚ DE LABORATORIOS =====")
         print("1. Ir a Laboratorio 1")
         print("2. Ir a Laboratorio 2")
+        print("3. Ir a Laboratorio 3")
+        print("4. Ir a Laboratorio 4")
         print("0. Salir del programa")
 
         guia = input("Selecciona un laboratorio: ")
@@ -225,6 +395,10 @@ def menu_principal():
             menu_lab1()
         elif guia == "2":
             menu_lab2()
+        elif guia == "3":
+            menu_lab3()
+        elif guia == "4":
+            menu_lab4()
         elif guia == "0":
             print("Saliendo del programa...")
             break
