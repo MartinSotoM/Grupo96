@@ -482,6 +482,72 @@ def ejercicio_4_4():
     plt.tight_layout()
     plt.show()
 
+# ====== Guía Práctica 5 ======
+
+def ejercicio_1_5():
+    print("\n----- Ejecutando Ejercicio 5 -----")
+
+    def limpiar_datos(lecturas):
+        datos = []
+
+        for dato in lecturas:
+            try:
+                flotante = float(dato)
+                datos.append(flotante)
+
+            except (ValueError, TypeError):
+                print(f"Error al convertir: {dato} / Entrada inválida")
+
+        if len(datos) > 0:
+            promedio = np.mean(datos)
+        else:
+            promedio = 0.0
+            
+        return promedio
+
+    lista_prueba = [22.5, "23.1", "Error", None, 21.8, " "]
+
+    limpieza = limpiar_datos(lista_prueba)
+    print(f"\nEl promedio de las temperaturas válidas es: {limpieza:.2f}")
+
+
+def ejercicio_2_5():
+    print("\n----- Ejecutando Ejercicio 2 -----")
+    
+    def calcular_eficiencia(p_salida, p_entrada):
+        assert p_salida >= 0 and p_entrada >= 0, "Las potencias no pueden ser negativas"
+
+        try: 
+            eficiencia = (p_salida / p_entrada) * 100
+            return f"{eficiencia:.2f}%"
+        
+        except ZeroDivisionError:
+            print("Error: Motor apagado o sin consumo")
+
+    prueba = [(150, 200), (100, 0), (-50, 100)]
+
+    for salida, entrada in prueba:
+        print(f"\nTesteando motor -> Salida: {salida}W | Entrada: {entrada}W")
+
+        try:
+            resultado = calcular_eficiencia(salida, entrada)
+            print(f"Resultado: {resultado}")
+
+        except AssertionError as error_capturado:
+            print(f"Alerta de Sistema: {error_capturado}")
+        
+
+def ejercicio_3_5():
+    print("\n----- Ejecutando Ejercicio 3 -----")
+    calibracion = {"temp": [1.02, 0.98, 1.04, 1.01], "hum": [1.05, 0.99, 1.02], "presion": [1.0, 0.99, 1.01, 0.98]}
+
+    sensor = input("Ingresa el nombre del sensor a consultar:")
+    fc = int(input("Ingresa el factor de calibración a revisar:"))
+
+
+def ejercicio_4_5():
+    print("\n----- Ejecutando Ejercicio 4 -----")
+
 
 def menu_guia_1():
     while True:
@@ -590,6 +656,32 @@ def menu_guia_4():
             print("Opción inválida.")
 
 
+def menu_guia_5():
+    while True:
+        print("\n----- MENÚ DE GUÍA 5 -----")
+        print("1. Ejecutar Ejercicio 1 / Estación Meteorológica - Validación de Datos Seriales")
+        print("2. Ejecutar Ejercicio 2 / Control de Motores - Operaciones Críticas y Aserciones")
+        print("3. Ejecutar Ejercicio 3 / Calibración de Sensores - Accesos seguros y Gráficos")
+        print("4. Ejecutar Ejercicio 4 / ")
+        print("0. Volver atrás")
+
+        opcion = input("Selecciona una opción: ")
+
+        if opcion == "1":
+            ejercicio_1_5()
+        elif opcion == "2":
+            ejercicio_2_5()
+        elif opcion == "3":
+            ejercicio_3_5()
+        elif opcion == "4":
+            ejercicio_4_5()
+        elif opcion == "0":
+            print("Volviendo al menú principal...")
+            break
+        else:
+            print("Opción inválida.")
+
+
 def menu_principal():
     while True:
         print("\n===== MENÚ DE GUÍAS PRÁCTICAS =====")
@@ -597,6 +689,7 @@ def menu_principal():
         print("2. Ir a Guía 2")
         print("3. Ir a Guía 3")
         print("4. Ir a Guía 4")
+        print("5. Ir a Guía 5")
         print("0. Salir del programa")
 
         guia = input("Selecciona una guía: ")
@@ -609,6 +702,8 @@ def menu_principal():
             menu_guia_3()
         elif guia == "4":
             menu_guia_4()
+        elif guia == "5":
+            menu_guia_5()
         elif guia == "0":
             print("Saliendo del programa...")
             break

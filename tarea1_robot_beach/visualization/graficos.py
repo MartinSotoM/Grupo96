@@ -1,3 +1,6 @@
+import os
+import matplotlib.pyplot as plt
+
 def plot_metricas(diccionario_experimentos, ambiente, ruta):
     return
 
