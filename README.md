@@ -6,6 +6,7 @@ Integrantes
 1. Francisco Figueroa
 2. Dhana Tapia
 3. Martín Soto
+4. Benjamín Vásquez
 
 ### Arquitectura y Modularidad del Sistema
 
