@@ -347,7 +347,83 @@ def ejercicio_4_4():
     plt.legend()
     plt.grid(True)
     plt.show()
-    
+
+#LABORATORIO 5
+
+def ejercicio_1_5():
+    print("\n----- Ejecutando Ejercicio 1 -----")
+
+    def procesar_trama(trama):
+        try:
+            partes = trama.split(':')
+
+            id_sensor = partes[0].strip()
+            valor = float(partes[1].strip())
+        
+            print(f"[ÉXITO] Sensor: {id_sensor} | Valor: {valor}")
+            return id_sensor, valor
+
+        except IndexError:
+            print(f"[ERROR] Trama incompleta. Falta el delimitador ':'. Trama recibida: '{trama}'")
+        
+        except ValueError:
+            print(f"[ERROR] Dato corrupto. El valor no es un número. Trama recibida: '{trama}'")
+        
+        except Exception as e:
+            print(f"[ERROR CRÍTICO] Falla técnica no prevista: {e}")
+
+    print("--- Iniciando Pruebas de Telemetría ---")
+    procesar_trama("TEMP:25.4")
+    procesar_trama("VOLTAJE_BAJO")
+    procesar_trama("PRESION:Basura")
+
+
+def ejercicio_2_5():
+    print("\n----- Ejecutando Ejercicio 2 -----")
+
+    def mover_servo(angulo):
+        try:
+            if not isinstance(angulo, int):
+                raise TypeError("ERROR: El ángulo no es un valor entero.")
+            
+            assert 0 <= angulo <= 180, "ERROR: Ángulo fuera del rango permitido."
+            
+            print(f"[MECÁNICA] Moviendo servo a {angulo}° de forma segura.")
+
+        finally:
+            print("Estado del motor: Standby\n")
+
+    #mover_servo(90)
+    #mover_servo(200)
+    #mover_servo("90")
+    #mover_servo(45.5)
+
+
+def ejercicio_3_5():
+    print("\n----- Ejecutando Ejercicio 3 -----")
+
+    sensores = {"temp": [22.5, 23.1, 22.8], "presion": [1013, 1015],"humedad": []}
+
+    try:
+        nombre = input("Ingrese un sensor a analizar:")
+        datos_sensor = sensores[nombre]
+
+        prom = sum(datos_sensor) / len(datos_sensor)
+        print(f"[ÉXITO] El promedio del sensor '{nombre}' es: {prom:.2f}")
+
+    except KeyError:
+        print("ERROR: Ese sensor no existe en el diccionario.")
+
+    except ZeroDivisionError:
+        print("ERROR: La lista del sensor esta vacía.")
+
+    finally:
+        print("Consulta de sensor finalizada.")
+
+
+def ejercicio_4_5():
+    print("\n----- Ejecutando Ejercicio 4 -----")
+
 
 def menu_lab1():
     while True:
@@ -450,6 +526,32 @@ def menu_lab4():
             print("Opción inválida.")
 
 
+def menu_lab5():
+    while True:
+        print("\n----- MENÚ DE LABORATORIO 5 -----")
+        print("1. Ejecutar Ejercicio 1 / Sistema de Telemetría: Parsing de Trama")
+        print("2. Ejecutar Ejercicio 2 / Control de Brazo Robótico: Validaciones Físicas")
+        print("3. Ejecutar Ejercicio 3 / Sistema de Monitoreo: Diccionarios y Divisiones")
+        print("4. Ejecutar Ejercicio 4 / ")
+        print("0. Volver atrás")
+
+        opcion = input("Selecciona una opción: ")
+
+        if opcion == "1":
+            ejercicio_1_5()
+        elif opcion == "2":
+            ejercicio_2_5()
+        elif opcion == "3":
+            ejercicio_3_5()
+        elif opcion == "4":
+            ejercicio_4_5()
+        elif opcion == "0":
+            print("Volviendo al menú principal...")
+            break
+        else:
+            print("Opción inválida.")
+
+
 def menu_principal():
     while True:
         print("\n===== MENÚ DE LABORATORIOS =====")
@@ -457,6 +559,7 @@ def menu_principal():
         print("2. Ir a Laboratorio 2")
         print("3. Ir a Laboratorio 3")
         print("4. Ir a Laboratorio 4")
+        print("5. Ir a Laboratorio 5")
         print("0. Salir del programa")
 
         guia = input("Selecciona un laboratorio: ")
@@ -469,6 +572,8 @@ def menu_principal():
             menu_lab3()
         elif guia == "4":
             menu_lab4()
+        elif guia == "5":
+            menu_lab5()
         elif guia == "0":
             print("Saliendo del programa...")
             break
