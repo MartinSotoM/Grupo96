@@ -548,6 +548,56 @@ def ejercicio_3_5():
 def ejercicio_4_5():
     print("\n----- Ejecutando Ejercicio 4 -----")
 
+# ====== Guía Práctica 6 ======
+
+def ejercicio_1_6():
+    print("\n----- Ejecutando Ejercicio 1 -----")
+
+    class Instrumento:
+        unidad_estandar = "SI"
+
+        def __init__(self, marca, modelo):
+            self.marca = marca
+            self.modelo = modelo
+
+        @staticmethod
+        def convertir_a_base(valor_mili):
+            return valor_mili / 1000
+        
+    class Osciloscopio(Instrumento):
+        def __init__(self, marca, modelo):
+            super().__init__(marca, modelo)
+
+            self.v_div = 1.0
+
+        def actualizar_v_div(self, nuevo_v_div):
+            self.v_div = nuevo_v_div
+            
+        def imprimir_config(self):
+            print(f"Configuración Actual: {self.marca} | {self.modelo} | {self.v_div} |{self.unidad_estandar}")
+
+    mi_osciloscopio = Osciloscopio("Tektronix", "TBS1052B")
+    mi_osciloscopio.imprimir_config()
+    mi_osciloscopio.actualizar_v_div(5.0)
+    print("\n[ACTUALIZANDO PARÁMETROS]")
+    mi_osciloscopio.imprimir_config()
+
+    lectura_mili = 500
+    lectura_base = Osciloscopio.convertir_a_base(lectura_mili)
+    print(f"\n[CONVERSIÓN] Lectura de {lectura_mili}[mV] convertida a base: {lectura_base} [V]")
+
+
+def ejercicio_2_6():
+    print("\n----- Ejecutando Ejercicio 2 -----")
+
+
+def ejercicio_3_6():
+    print("\n----- Ejecutando Ejercicio 3 -----")
+
+
+def ejercicio_4_6():
+    print("\n----- Ejecutando Ejercicio 4 -----")
+
 
 def menu_guia_1():
     while True:
@@ -682,6 +732,32 @@ def menu_guia_5():
             print("Opción inválida.")
 
 
+def menu_guia_6():
+    while True:
+        print("\n----- MENÚ DE GUÍA 6 -----")
+        print("1. Ejecutar Ejercicio 1 / Instrumentación Electrónica - El Laboratorio de Medición")
+        print("2. Ejecutar Ejercicio 2 / ")
+        print("3. Ejecutar Ejercicio 3 / ")
+        print("4. Ejecutar Ejercicio 4 / ")
+        print("0. Volver atrás")
+
+        opcion = input("Selecciona una opción: ")
+
+        if opcion == "1":
+            ejercicio_1_6()
+        elif opcion == "2":
+            ejercicio_2_6()
+        elif opcion == "3":
+            ejercicio_3_6()
+        elif opcion == "4":
+            ejercicio_4_6()
+        elif opcion == "0":
+            print("Volviendo al menú principal...")
+            break
+        else:
+            print("Opción inválida.")
+
+
 def menu_principal():
     while True:
         print("\n===== MENÚ DE GUÍAS PRÁCTICAS =====")
@@ -690,6 +766,7 @@ def menu_principal():
         print("3. Ir a Guía 3")
         print("4. Ir a Guía 4")
         print("5. Ir a Guía 5")
+        print("6. Ir a Guía 6")
         print("0. Salir del programa")
 
         guia = input("Selecciona una guía: ")
@@ -704,6 +781,8 @@ def menu_principal():
             menu_guia_4()
         elif guia == "5":
             menu_guia_5()
+        elif guia == "6":
+            menu_guia_6()
         elif guia == "0":
             print("Saliendo del programa...")
             break
