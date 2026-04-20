@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import random
 import time
+import math
 
 #LABORATORIO 1
 
@@ -423,6 +424,70 @@ def ejercicio_3_5():
 
 def ejercicio_4_5():
     print("\n----- Ejecutando Ejercicio 4 -----")
+    
+    try:
+        r_str = input("Ingrese el valor de la Resistencia (R) en Ohms: ")
+        x_str = input("Ingrese el valor de la Reactancia (X) en Ohms: ")
+        
+        r = float(r_str)
+        x = float(x_str)
+        
+    except ValueError:
+        print("[ERROR CRÍTICO] Entrada inválida. Debes ingresar valores numéricos puros (ej. 150.5).")
+        
+    else:
+        z_magnitud = math.sqrt(r**2 + x**2)
+        print(f"[RESULTADO] La magnitud de la impedancia |Z| es: {z_magnitud:.2f} Ohms")
+
+#LABORATORIO 6
+
+def ejercicio_1_6():
+    print("\n----- Ejecutando Ejercicio 1 -----")
+
+
+def ejercicio_2_6():
+    print("\n----- Ejecutando Ejercicio 2 -----")
+
+    class Instrumento:
+
+        def __init__(self, marca):
+            self.marca = marca
+            self.estado = "Apagado"
+
+        def encender(self):
+            self.estado = "Encendido"
+            print(f"El equipo {self.marca} se ha encendido.")
+
+        @staticmethod
+        def validar_voltaje(voltaje):
+            return voltaje <= 220
+        
+    class Osciloscopio(Instrumento):
+
+        def __init__(self, marca, canales):
+            super().__init__(marca)
+            self.canales = canales
+
+        def medir_senal(self):
+            if self.estado == "Encendido":
+                print(f"[LECTURA] {self.marca} capturando ondas en {self.canales} canales... [~_~_~]")
+            else:
+                print(f"[ERROR] {self.marca} está apagado. Imposible medir señal.")
+                
+    mi_osciloscopio = Osciloscopio("Rigol", 4)
+    mi_osciloscopio.medir_senal()
+    mi_osciloscopio.encender()
+    mi_osciloscopio.medir_senal()
+    
+    print(f"¿Voltaje 240V seguro?: {Instrumento.validar_voltaje(240)}")
+
+
+def ejercicio_3_6():
+    print("\n----- Ejecutando Ejercicio 3 -----")
+
+
+def ejercicio_4_6():
+    print("\n----- Ejecutando Ejercicio 4 -----")
 
 
 def menu_lab1():
@@ -532,6 +597,32 @@ def menu_lab5():
         print("1. Ejecutar Ejercicio 1 / Sistema de Telemetría: Parsing de Trama")
         print("2. Ejecutar Ejercicio 2 / Control de Brazo Robótico: Validaciones Físicas")
         print("3. Ejecutar Ejercicio 3 / Sistema de Monitoreo: Diccionarios y Divisiones")
+        print("4. Ejecutar Ejercicio 4 / Calculadora de Impedancia (propuesto)")
+        print("0. Volver atrás")
+
+        opcion = input("Selecciona una opción: ")
+
+        if opcion == "1":
+            ejercicio_1_5()
+        elif opcion == "2":
+            ejercicio_2_5()
+        elif opcion == "3":
+            ejercicio_3_5()
+        elif opcion == "4":
+            ejercicio_4_5()
+        elif opcion == "0":
+            print("Volviendo al menú principal...")
+            break
+        else:
+            print("Opción inválida.")
+
+
+def menu_lab6():
+    while True:
+        print("\n----- MENÚ DE LABORATORIO 6 -----")
+        print("1. Ejecutar Ejercicio 1 / ")
+        print("2. Ejecutar Ejercicio 2 / Herencia y Métodos: Instrumentación de Laboratorio")
+        print("3. Ejecutar Ejercicio 3 / ")
         print("4. Ejecutar Ejercicio 4 / ")
         print("0. Volver atrás")
 
@@ -560,6 +651,7 @@ def menu_principal():
         print("3. Ir a Laboratorio 3")
         print("4. Ir a Laboratorio 4")
         print("5. Ir a Laboratorio 5")
+        print("6. Ir a Laboratorio 6")
         print("0. Salir del programa")
 
         guia = input("Selecciona un laboratorio: ")
@@ -574,6 +666,8 @@ def menu_principal():
             menu_lab4()
         elif guia == "5":
             menu_lab5()
+        elif guia == "6":
+            menu_lab6()
         elif guia == "0":
             print("Saliendo del programa...")
             break
