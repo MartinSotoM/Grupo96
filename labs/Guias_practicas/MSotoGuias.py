@@ -590,6 +590,16 @@ def ejercicio_1_6():
 def ejercicio_2_6():
     print("\n----- Ejecutando Ejercicio 2 -----")
 
+    class Contenido:
+        conteo_total = ()
+
+        def __init__(self, titulo, año):
+            self.titulo = titulo
+            self.año = año
+
+        @classmethod
+        def obtener_total(cls, conteo_total):
+            pass
 
 def ejercicio_3_6():
     print("\n----- Ejecutando Ejercicio 3 -----")
@@ -736,7 +746,7 @@ def menu_guia_6():
     while True:
         print("\n----- MENÚ DE GUÍA 6 -----")
         print("1. Ejecutar Ejercicio 1 / Instrumentación Electrónica - El Laboratorio de Medición")
-        print("2. Ejecutar Ejercicio 2 / ")
+        print("2. Ejecutar Ejercicio 2 / Gestión de CineBot - Catálogo de Streaming")
         print("3. Ejecutar Ejercicio 3 / ")
         print("4. Ejecutar Ejercicio 4 / ")
         print("0. Volver atrás")

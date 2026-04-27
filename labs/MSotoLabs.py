@@ -489,6 +489,58 @@ def ejercicio_3_6():
 def ejercicio_4_6():
     print("\n----- Ejecutando Ejercicio 4 -----")
 
+#LABORATORIO 7
+
+def ejercicio_1_7():
+    print("\n----- Ejecutando Ejercicio 1 -----")
+
+    class Termostato:
+        def __init__(self, habitacion):
+            self.habitacion = habitacion
+            self.__temperatura = 20
+
+        def ver_temperatura(self):
+            print(f"El valor actual de temperatura es: {self.__temperatura}")
+
+        def cambiar_temperatura(self, nuevo_valor):
+            if 15 <= nuevo_valor <= 30:
+                self.__temperatura = nuevo_valor
+                print("Se ha actualizado el valor de la temperatura.")
+            else:
+                print("Error: Temperatura no permitida.")
+
+
+def ejercicio_2_7():
+    print("\n----- Ejecutando Ejercicio 2 -----")
+
+    class Sensor:
+        def medir(self):
+            print("Midiendo datos base...")
+
+    class SensorTemperatura(Sensor):
+        def medir(self):
+            print("Midiendo temperatura en grados Celsius.")
+
+    class SensorLuz(Sensor):
+        def medir(self):
+            print("Midiendo nivel de luz en Lux.")
+
+    def iniciar_medicion(sensor_cualquiera):
+        sensor_cualquiera.medir()
+
+    temp_sens = SensorTemperatura()
+    luz_sens = SensorLuz()
+
+    temp_sens.medir()
+    luz_sens.medir()
+
+    print("\n[INICIANDO PROTOCOLO DE MEDICIÓN]")
+    iniciar_medicion(temp_sens)
+    iniciar_medicion(luz_sens)
+
+def ejercicio_3_7():
+    print("\n----- Ejecutando Ejercicio 3 -----")
+
 
 def menu_lab1():
     while True:
@@ -629,13 +681,36 @@ def menu_lab6():
         opcion = input("Selecciona una opción: ")
 
         if opcion == "1":
-            ejercicio_1_5()
+            ejercicio_1_6()
         elif opcion == "2":
-            ejercicio_2_5()
+            ejercicio_2_6()
         elif opcion == "3":
-            ejercicio_3_5()
+            ejercicio_3_6()
         elif opcion == "4":
-            ejercicio_4_5()
+            ejercicio_4_6()
+        elif opcion == "0":
+            print("Volviendo al menú principal...")
+            break
+        else:
+            print("Opción inválida.")
+
+
+def menu_lab7():
+    while True:
+        print("\n----- MENÚ DE LABORATORIO 7 -----")
+        print("1. Ejecutar Ejercicio 1 / Encapsulamiento: Termostato Seguro")
+        print("2. Ejecutar Ejercicio 2 / Polimorfismo: Tipos de Sensores")
+        print("3. Ejecutar Ejercicio 3 / ")
+        print("0. Volver atrás")
+
+        opcion = input("Selecciona una opción: ")
+
+        if opcion == "1":
+            ejercicio_1_7()
+        elif opcion == "2":
+            ejercicio_2_7()
+        elif opcion == "3":
+            ejercicio_3_7()
         elif opcion == "0":
             print("Volviendo al menú principal...")
             break
@@ -652,6 +727,7 @@ def menu_principal():
         print("4. Ir a Laboratorio 4")
         print("5. Ir a Laboratorio 5")
         print("6. Ir a Laboratorio 6")
+        print("7. Ir a Laboratorio 7")
         print("0. Salir del programa")
 
         guia = input("Selecciona un laboratorio: ")
@@ -668,6 +744,8 @@ def menu_principal():
             menu_lab5()
         elif guia == "6":
             menu_lab6()
+        elif guia == "7":
+            menu_lab7()
         elif guia == "0":
             print("Saliendo del programa...")
             break
