@@ -4,6 +4,7 @@ import pandas as pd
 import random
 import time
 import math
+from abc import ABC, abstractmethod
 
 #LABORATORIO 1
 
@@ -538,8 +539,81 @@ def ejercicio_2_7():
     iniciar_medicion(temp_sens)
     iniciar_medicion(luz_sens)
 
+
 def ejercicio_3_7():
     print("\n----- Ejecutando Ejercicio 3 -----")
+
+    class Motor:
+        
+        @abstractmethod
+
+        def moverse(self):
+            pass
+        
+    class MotorPasoAPaso(Motor):
+        def moverse(self):
+            print("Moviendo por pasos...")
+
+    class Servomotor(Motor):
+        def moverse(self):
+            print("Moviendo a un ángulo exacto...")
+    
+    linea_de_produccion = [MotorPasoAPaso(), Servomotor()]
+
+    for motor in linea_de_produccion:
+        motor.moverse()
+
+
+#LABORATORIO 8
+
+def ejercicio_1_8():
+    print("\n----- Ejecutando Ejercicio 1 -----")
+
+    t = np.linspace(0, 10, 100)
+    seno = np.sin(t)
+
+    plt.plot(t, seno)
+    plt.title("Señal Senoidal")
+    plt.xlabel("Tiempo")
+    plt.ylabel("Amplitud")
+    plt.grid(True)
+    plt.show()
+
+
+def ejercicio_2_8():
+    print("\n----- Ejecutando Ejercicio 2 -----")
+
+    datos = {"Componente": ["Arduino", "Resistencia 1k", "Capacitor", "MotorDC"] ,"Stock": [5 , 500 , 120 , 3]}
+
+    df_datos = pd.DataFrame(datos)
+    stock_critico = df_datos[df_datos["Stock"] < 10]
+
+    print(stock_critico)
+
+
+def ejercicio_3_8():
+    print("\n----- Ejecutando Ejercicio 3 -----")
+
+    class Bateria:
+        def __init__(self, marca):
+            self.marca = marca
+            self.__carga = 100
+
+        def usar_bateria(self, gasto):
+            self.__carga -= gasto
+            if self.__carga < 0:
+                self.__carga = 0
+                print("¡Batería Agotada!")
+
+        def ver_carga(self):
+            print(f"Porcentaje Actual de Batería: {self.__carga}")
+
+    bateria_prueba = Bateria("Litio")
+    bateria_prueba.ver_carga()
+    bateria_prueba.usar_bateria(40)
+    bateria_prueba.ver_carga()
+    bateria_prueba.usar_bateria(80)
+    bateria_prueba.ver_carga()
 
 
 def menu_lab1():
@@ -700,7 +774,7 @@ def menu_lab7():
         print("\n----- MENÚ DE LABORATORIO 7 -----")
         print("1. Ejecutar Ejercicio 1 / Encapsulamiento: Termostato Seguro")
         print("2. Ejecutar Ejercicio 2 / Polimorfismo: Tipos de Sensores")
-        print("3. Ejecutar Ejercicio 3 / ")
+        print("3. Ejecutar Ejercicio 3 / Abstracción: Plantilla para Motores")
         print("0. Volver atrás")
 
         opcion = input("Selecciona una opción: ")
@@ -718,6 +792,29 @@ def menu_lab7():
             print("Opción inválida.")
 
 
+def menu_lab8():
+    while True:
+        print("\n----- MENÚ DE LABORATORIO 8 -----")
+        print("1. Ejecutar Ejercicio 1 / Repaso de NumPy y Matplotlib: Señal Senoidal")
+        print("2. Ejecutar Ejercicio 2 / Repaso de Pandas: Filtro de Inventario")
+        print("3. Ejecutar Ejercicio 3 / Repaso de POO: Clases y Encapsulamiento")
+        print("0. Volver atrás")
+
+        opcion = input("Selecciona una opción: ")
+
+        if opcion == "1":
+            ejercicio_1_8()
+        elif opcion == "2":
+            ejercicio_2_8()
+        elif opcion == "3":
+            ejercicio_3_8()
+        elif opcion == "0":
+            print("Volviendo al menú principal...")
+            break
+        else:
+            print("Opción inválida.")
+
+
 def menu_principal():
     while True:
         print("\n===== MENÚ DE LABORATORIOS =====")
@@ -728,6 +825,7 @@ def menu_principal():
         print("5. Ir a Laboratorio 5")
         print("6. Ir a Laboratorio 6")
         print("7. Ir a Laboratorio 7")
+        print("8. Ir a Laboratorio 8")
         print("0. Salir del programa")
 
         guia = input("Selecciona un laboratorio: ")
@@ -746,6 +844,8 @@ def menu_principal():
             menu_lab6()
         elif guia == "7":
             menu_lab7()
+        elif guia == "8":
+            menu_lab8()
         elif guia == "0":
             print("Saliendo del programa...")
             break
