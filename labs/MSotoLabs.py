@@ -563,7 +563,6 @@ def ejercicio_3_7():
     for motor in linea_de_produccion:
         motor.moverse()
 
-
 #LABORATORIO 8
 
 def ejercicio_1_8():
