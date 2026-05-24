@@ -22,3 +22,7 @@ Este proyecto fue diseñado aplicando una arquitectura modular basada en paquete
 * **Definición de Paquetes Formales:** Las carpetas internas han sido estructuradas con archivos `__init__.py` para que Python las reconozca como paquetes importables y no como simples directorios del sistema operativo.
 
 * **Higiene del Repositorio:** Se ha configurado un `.gitignore` para bloquear la subida de binarios compilados de Python (`__pycache__/`), garantizando que el control de versiones en GitHub mantenga un historial limpio y enfocado exclusivamente en el código fuente.
+
+### tarea_mundial_poo
+
+Se ha seleccionado a la selección de Francia como candidata a ganar la Copa del Mundo 2026 debido a su innegable superioridad estadística y táctica. A diferencia de otras selecciones que dependen de ciclos veteranos, Francia posee el recambio generacional más sólido y profundo del fútbol actual, combinando juventud en el mediocampo (Tchouaméni, Camavinga) con experiencia en la zaga central (Saliba, Upamecano). Tácticamente, su esquema 1-4-4-2 permite transiciones ofensivas letales, capitalizando la velocidad y capacidad de definición de Kylian Mbappé, el jugador más determinante en el uno contra uno a nivel global. Esta estructura les otorga la mayor probabilidad matemática y física de dominar el torneo.
