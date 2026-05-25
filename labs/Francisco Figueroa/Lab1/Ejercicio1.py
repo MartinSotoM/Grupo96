@@ -1,5 +1,4 @@
-
-# ejercicio1:
+# Ejercicio1:
 #Ingrese los valores de voltaje (V) y corriente(I)
 V = int(input('Ingrese los valores de voltaje (V): ')) #tiene que ser con int, ya que es un numero con letras
 I = int(input('Ingrese valores de corriente (I): '))
